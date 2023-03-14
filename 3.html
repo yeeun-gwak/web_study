@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <title>WEB STUDY</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1><a href="index.html">WEB</a></h1>
+        <ol>
+            <li><a href="1.html">HTML</a></li>
+            <li><a href="2.html">CSS</a></li>
+            <li><a href="3.html">브라우저 동작원리</a></li>
+        </ol>
+        
+        <hr>
+        <h2>브라우저 동작원리</h2>
+        <p  style="margin-top:45px;">
+            브라우저의 주요 기능은 사용자가 선택한 자원(주로 HTML)을 서버에 요청하고 브라우저에 표시하는 것으로, 
+            자원의 주소는 URL(Uniform Resource Identifier)에 의해 정해짐
+            <ol>
+                <li>Parsing단계<br>브라우저의 핵심 기능은 사용자가 참조하고자 하는 웹페이지를 서버에 요청(Request)하고 서버의 응답(Response)을 받아 브라우저에 표시하는 것이다. 
+                    브라우저는 서버로부터 HTML, CSS, Javascript, 이미지 파일 등을 응답받는다.  
+                    HTML, CSS 파일은 렌더링 엔진의 HTML 파서와 CSS 파서에 의해 파싱(Parsing)되어 DOM, CSSOM 트리로 변환된다.
+                </li>
+                <li>Style단계<br>Parsing 단계에서 생성된 DOM, CSSOM 트리를 매칭시켜서 Render Tree를 구성한다. Render Tree는 실제로 화면에 그려질 Tree이다. 
+                    (visibility: hidden 은 요소가 공간을 차지하지만 보이지 않아서 렌더트리에 포함되지만 display: none 의 경우 렌더트리에서 제외됨)
+                </li>
+                <li>Layout 단계<br>구성한 렌더 트리를 화면에 어떻게 배치할 것인지 노드의 정학환 위치와 크기를 계산한다. 
+                    루트부터 노드를 순회하면서 노드의 정확한 크기와 위치를 계산하고 Render Tree에 반영한다.
+                </li>
+                <li>Paint 단계
+                    Layout단계에서 계산된 값을 이용해 렌더 트리의 각 노드를 화면 상의 실제 픽셀로 변환한다. 
+                    이때 픽셀로 변환된 결과는 하나의 레이어가 아니라 여러개의 레이어로 관리됨
+                </li>
+                <li>Composite 단계<br>paint 단계에서 생성된 레이어를 합성하여 실제 화면에 나타낸다. 우리는 화면에서 웹페이지를 볼 수 잇다.
+                </li>
+            </ol>
+        </p>
+        <p style="margin-top:20px;">
+            1단계 Parsing 단계에서 자바스크립트는 렌더링 엔진이 아닌 자바스크립트 엔진이 처리한다. 
+            HTML 파서는 script 태그를 만나면 자바스크립트 코드를 실행하기 위해 DOM 생성 프로세스를 중지하고 자바스크립트 엔진으로 제어 권한을 넘긴다. 
+            제어 권한을 넘겨 받은 자바스크립트 엔진은 script 태그 내의 자바스크립트 코드 또는 script 태그의 src 속성에 정의된 자바스크립트 파일을 로드하고 파싱하여 실행한다. 
+            자바스크립트의 실행이 완료되면 다시 HTML 파서로 제어 권한을 넘겨서 브라우저가 중지했던 시점부터 DOM 생성을 재개한다.
+            이처럼 브라우저는 동기(Synchronous)적으로 HTML, CSS, Javascript을 처리한다. 
+            이것은 script 태그의 위치에 따라 블로킹이 발생하여 DOM의 생성이 지연될 수 있다는 것을 의미한다. 
+            따라서 script 태그의 위치는 중요한 의미를 갖는다.
+            body 요소의 가장 아래에 자바스크립트를 위치시키는 것은 좋은 아이디어이다. 그 이유는 아래와 같다.
+            <ul>
+                <li>HTML 요소들이 스크립트 로딩 지연으로 인해 렌더링에 지장 받는 일이 발생하지 않아 페이지 로딩 시간이 단축된다.</li>
+                <li>DOM이 완성되지 않은 상태에서 자바스크립트가 DOM을 조작한다면 에러가 발생한다.</li>
+                <li>브라우저는 HTML과 CSS 명세(W3C(웹표준화기구)에서 정한 명세)에 따라 HTML파일을 해석해서 표시</li>
+            </ul>
+        </p>
+        <img 
+            src="https://d2.naver.com/content/images/2015/06/helloworld-59361-1.png"
+            width="50%">
+        
+        
+    </body>
+</html>
+
+
